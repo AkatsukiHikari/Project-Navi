@@ -34,10 +34,15 @@ export function initAuth<
       discord: {
         clientId: options.discordClientId,
         clientSecret: options.discordClientSecret,
-        redirectURI: `${options.productionUrl}/api/auth/callback/discord`,
+        redirectURI: `${options.baseUrl}/api/auth/callback/discord`,
       },
     },
-    trustedOrigins: ["expo://"],
+    trustedOrigins: [
+      "expo://",
+      "http://localhost:8081", // Expo web
+      "http://localhost:19006", // Expo web alternative port
+      "http://localhost:19000", // Expo Metro bundler
+    ],
     onAPIError: {
       onError(error, ctx) {
         console.error("BETTER AUTH API ERROR", error, ctx);
